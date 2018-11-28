@@ -153,3 +153,8 @@ function Person(_x, _y, _diameter1, _diameter2) {
 
   }
 }
+
+
+function windowResized(){
+  resizeCanvas(windowWidth,windowHeight);
+};
