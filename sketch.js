@@ -5,6 +5,7 @@ var sofa;
 var lamp;
 
 var amp;
+var w;
 
 
 var people = [];
@@ -28,6 +29,10 @@ function setup() {
 
   amp = new p5.Amplitude();
 
+fft = new p5.FFT (0.7,512);
+
+w = width / 150;
+
 
   for (var i = 0; i < 6; i++) {
     var myPerson = new Person(random(width / 2 - 200, width / 2 + 200), random(height / 2, height / 2 + 50), random(40, 60), random(60, 80));
@@ -40,7 +45,7 @@ function setup() {
 function draw() {
   imageMode(CENTER);
 
-
+var spectrum = fft.analyze();
 
 
 
@@ -100,7 +105,17 @@ function draw() {
 
   }
 
-
+  for (var i = 0; i < 250; i++){
+    var mp = spectrum[i];
+    var y = map(mp,0,width,height,0);
+    var rR = random (100, 255);
+    var gR = random (100, 255);
+    var bR = random (100, 255);
+    fill(rR, gR, bR);
+    noStroke();
+    rect(i*w, y, w - 2, height - y);
+    rect(i*w, height - y, w - 2, y - height);
+  }
 
 
 
